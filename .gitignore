@@ -1,0 +1,21 @@
+# Node / pnpm
+node_modules/
+pnpm-lock.yaml
+npm-debug.log*
+.yarn/*
+.yarnrc.yml
+
+# Builds & caches
+dist/
+build/
+coverage/
+.vite/
+**/.vite/
+
+# Env
+.env
+.env.*local
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    // File layout
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // Language/Runtime
+    "target": "ES2021",
+    "lib": ["ES2021"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+
+    // Types
+    "types": ["node"],
+
+    // Output & DX
+    "sourceMap": true,
+    "skipLibCheck": true,
+
+    // Strictness
+    "strict": true,
+
+    // Nice-to-have for backend builds
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"]
+}
