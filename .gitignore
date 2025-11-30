@@ -1,21 +1,34 @@
-# Node / pnpm
+# dependencies & caches
 node_modules/
-pnpm-lock.yaml
-npm-debug.log*
-.yarn/*
-.yarnrc.yml
+**/node_modules/
+.pnpm/
+**/.pnpm/
+.pnpm-store/
+**/.pnpm-store/
+**/pnpm-debug.log*
+**/.eslintcache
 
-# Builds & caches
+# builds
 dist/
 build/
 coverage/
 .vite/
 **/.vite/
+.next/
+out/
 
-# Env
+# env
 .env
+**/.env
 .env.*local
 
-# OS
+# editors/OS
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
 .DS_Store
 Thumbs.db
+
+# docker
+docker-data/

@@ -1,0 +1,50 @@
+# docker-compose.yml (put at repo root)
+services:
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025" # UI http://localhost:8025
+      - "1025:1025" # SMTP
+
+  api:
+    image: node:22-alpine
+    working_dir: /app
+    env_file: ./api/.env
+    environment:
+      CI: "true"
+      # connect from container to your host MongoDB (Compass)
+      MONGO_URI: mongodb://admin:adminpw@host.docker.internal:27017/vanilla_mern?authSource=admin
+      # If file watching is flaky on Windows, uncomment:
+      # CHOKIDAR_USEPOLLING: "1"
+      # WATCHPACK_POLLING: "1"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mailpit
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    command: >
+      sh -c "corepack enable &&
+             pnpm i &&
+             pnpm dev"
+
+  web:
+    image: node:22-alpine
+    working_dir: /usr/src/app
+    env_file: ./web/.env
+    environment:
+      CI: "true"
+      # CHOKIDAR_USEPOLLING: "1"
+      # WATCHPACK_POLLING: "1"
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+    volumes:
+      - ./web:/usr/src/app
+      - /usr/src/app/node_modules
+    command: >
+      sh -c "corepack enable &&
+             pnpm i &&
+             pnpm dev -- --host 0.0.0.0"

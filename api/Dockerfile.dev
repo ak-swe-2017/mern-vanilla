@@ -1,0 +1,9 @@
+FROM node:22-alpine
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm i --frozen-lockfile
+COPY tsconfig.json ./
+# copy src so nodemon can watch later via volume
+RUN pnpm add -D nodemon
+CMD ["pnpm","nodemon","--watch","src","--exec","pnpm","dev"]
+
